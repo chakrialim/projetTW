@@ -13,8 +13,9 @@ INSERT INTO CATEGORIE (CODE, LIBELLE, DESCRIPTION) VALUES
 (7, 'Vitamines et Compléments', 'Suppléments nutritionnels'),
 (8, 'Médicaments Cardiovasculaires', 'Médicaments pour le cœur et la circulation'),
 (9, 'Médicaments Gastro-intestinaux', 'Médicaments pour les troubles digestifs'),
-(10, 'Médicaments Respiratoires', 'Médicaments pour les troubles respiratoires');
-ALTER TABLE Categorie ALTER COLUMN code RESTART WITH 11;
+(10, 'Médicaments Respiratoires', 'Médicaments pour les troubles respiratoires'),
+(11, 'Autres', 'Autres médicaments');
+--ALTER TABLE Categorie ALTER COLUMN code RESTART WITH 11;
 
 -- Catégorie 1: Antalgiques et Antipyrétiques
 INSERT INTO MEDICAMENT (NOM, CATEGORIE_CODE, QUANTITE_PAR_UNITE, PRIX_UNITAIRE, UNITES_EN_STOCK, UNITES_COMMANDEES, NIVEAU_DE_REAPPRO, INDISPONIBLE, imageURL) VALUES
@@ -169,7 +170,7 @@ INSERT INTO COMMANDE (NUMERO, SAISIELE, ENVOYEELE, DISPENSAIRE_CODE, PORT, REMIS
 (6, '2024-03-10', '2024-03-13', 'DSP06', 10.00, 5.50, 'Dispensaire Rufisque', '34 Avenue Blaise Diagne', '11000', 'Rufisque', 'Dakar', 'Sénégal'),
 (7, '2024-03-20', NULL, 'DSP07', 22.00, 4.50, 'Dispensaire Louga', '67 Rue Abdoulaye Wade', '50000', 'Louga', 'Louga', 'Sénégal'),
 (8, '2024-04-05', '2024-04-08', 'DSP08', 30.00, 7.00, 'Dispensaire Tambacounda', '23 Avenue Demba Diop', '23000', 'Tambacounda', 'Tambacounda', 'Sénégal');
-ALTER TABLE Commande ALTER COLUMN numero RESTART WITH 9;
+--ALTER TABLE Commande ALTER COLUMN numero RESTART WITH 9;
 
 -- Insertion des lignes de commande
 INSERT INTO LIGNE (COMMANDE_NUMERO, MEDICAMENT_REFERENCE, QUANTITE) VALUES
@@ -181,3 +182,20 @@ INSERT INTO LIGNE (COMMANDE_NUMERO, MEDICAMENT_REFERENCE, QUANTITE) VALUES
 (6, 6, 110), (6, 16, 65), (6, 26, 85), (6, 36, 60), (6, 91, 70),
 (7, 7, 80), (7, 17, 50), (7, 27, 95), (7, 37, 55), (7, 100, 45),
 (8, 8, 100), (8, 18, 75), (8, 28, 80), (8, 38, 70), (8, 48, 60);
+
+
+-- Insertion des fournisseurs
+
+INSERT INTO FOURNISSEUR (NOM, ADRESSEELEC) VALUES
+('Grand Fourni', 'plowmustwork+grandfourni@gmail.com'),
+('Fourni Viste', 'plowmustwork+fourniviste@gmail.com'),
+('Pharma Fourni', 'plowmustwork+pharmafourni@gmail.com'),
+('Fourni Deluxe', 'plowmustwork+fournieluxe@gmail.com'),
+('Fourni Plus', 'plowmustwork+fourniplus@gmail.com');
+
+INSERT INTO FOURNISSEUR_CATEGORIE (FOURNISSEUR_ID, CATEGORIE_CODE) VALUES
+(1, 1), (1, 2), (1, 3), (1, 4), (1, 5),
+(2, 1), (2, 2), (2, 6), (2, 7), (2, 8),
+(3, 1), (3, 2), (3, 3), (3, 4), (3, 5),
+(4, 6), (4, 7), (4, 8), (4, 9), (4, 10),
+(5, 8), (5, 9), (5, 10), (5, 5), (5, 7);

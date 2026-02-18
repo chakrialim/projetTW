@@ -214,4 +214,5 @@ public class CommandeService {
     public List<Commande> getCommandeEnCoursPour(String dispensaireCode) {
         return commandeDao.commandesEnCoursPour(dispensaireCode);
     }
+
 }

@@ -30,5 +30,6 @@ public interface CategorieRepository extends JpaRepository<Categorie, Integer> {
      */
     List<Categorie> findByLibelleContaining(String substring);
 
+    
 
 }
