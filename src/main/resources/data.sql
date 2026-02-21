@@ -3,19 +3,19 @@
 -- Le fichier est chargé au démarrage de l''application
 
 -- Insertion des catégories de médicaments
-INSERT INTO CATEGORIE (CODE, LIBELLE, DESCRIPTION) VALUES
-(1, 'Antalgiques et Antipyrétiques', 'Médicaments contre la douleur et la fièvre'),
-(2, 'Anti-inflammatoires', 'Médicaments réduisant l''inflammation'),
-(3, 'Antibiotiques', 'Médicaments pour traiter les infections bactériennes'),
-(4, 'Antihypertenseurs', 'Médicaments pour traiter l''hypertension artérielle'),
-(5, 'Antidiabétiques', 'Médicaments pour traiter le diabète'),
-(6, 'Antihistaminiques', 'Médicaments pour traiter les allergies'),
-(7, 'Vitamines et Compléments', 'Suppléments nutritionnels'),
-(8, 'Médicaments Cardiovasculaires', 'Médicaments pour le cœur et la circulation'),
-(9, 'Médicaments Gastro-intestinaux', 'Médicaments pour les troubles digestifs'),
-(10, 'Médicaments Respiratoires', 'Médicaments pour les troubles respiratoires'),
-(11, 'Autres', 'Autres médicaments');
---ALTER TABLE Categorie ALTER COLUMN code RESTART WITH 11;
+INSERT INTO CATEGORIE (LIBELLE, DESCRIPTION) VALUES
+('Antalgiques et Antipyrétiques', 'Médicaments contre la douleur et la fièvre'),
+('Anti-inflammatoires', 'Médicaments réduisant l''inflammation'),
+('Antibiotiques', 'Médicaments pour traiter les infections bactériennes'),
+('Antihypertenseurs', 'Médicaments pour traiter l''hypertension artérielle'),
+('Antidiabétiques', 'Médicaments pour traiter le diabète'),
+('Antihistaminiques', 'Médicaments pour traiter les allergies'),
+('Vitamines et Compléments', 'Suppléments nutritionnels'),
+('Médicaments Cardiovasculaires', 'Médicaments pour le cœur et la circulation'),
+('Médicaments Gastro-intestinaux', 'Médicaments pour les troubles digestifs'),
+('Médicaments Respiratoires', 'Médicaments pour les troubles respiratoires'),
+('Autres', 'Autres médicaments');
+--ALTER TABLE CATEGORIE ALTER COLUMN CODE RESTART WITH 12;
 
 -- Catégorie 1: Antalgiques et Antipyrétiques
 INSERT INTO MEDICAMENT (NOM, CATEGORIE_CODE, QUANTITE_PAR_UNITE, PRIX_UNITAIRE, UNITES_EN_STOCK, UNITES_COMMANDEES, NIVEAU_DE_REAPPRO, INDISPONIBLE, imageURL) VALUES
