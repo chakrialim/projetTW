@@ -85,7 +85,7 @@ public class Medicament {
 
 	@ToString.Exclude
 	@JsonIgnore // On n'inclut pas les lignes quand on convertit le médicament en JSON
-	@OneToMany(mappedBy = "medicament", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+	@OneToMany(mappedBy = "medicament", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Ligne> lignes = new LinkedList<>();
 
 
