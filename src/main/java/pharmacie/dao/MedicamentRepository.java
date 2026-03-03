@@ -60,7 +60,12 @@ public interface MedicamentRepository extends JpaRepository<Medicament, Integer>
     """)
     List<Object> medicamentsCommandesPourV2(Integer codeCategorie);
 
-
+    /**
+     * Récupère les médicaments disponibles à la vente.
+     * Un médicament est considéré disponible si son stock est supérieur aux unités déjà commandées.
+     *
+     * @return la liste des médicaments disponibles
+     */
 
     @Query("""
        SELECT m from Medicament m
@@ -70,12 +75,17 @@ public interface MedicamentRepository extends JpaRepository<Medicament, Integer>
     List<Medicament> medicamentsDisponibles();
 
 
-
+    /**
+     * Récupère les médicaments dont le stock est insuffisant et nécessite un réapprovisionnement.
+     * Un médicament doit être réapprovisionné lorsque ses unités en stock
+     * sont inférieures à son niveau de réapprovisionnement défini.
+     *
+     * @return la liste des médicaments à réapprovisionner
+     */
     @Query("""
        SELECT m from Medicament m
-       WHERE m.unitesEnStock > m.niveauDeReappro
+       WHERE m.unitesEnStock < m.niveauDeReappro
      """)
     List<Medicament> medicamentsReappro();
-
-
+     
 }

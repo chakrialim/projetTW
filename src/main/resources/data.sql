@@ -199,3 +199,10 @@ INSERT INTO FOURNISSEUR_CATEGORIE (FOURNISSEUR_ID, CATEGORIE_CODE) VALUES
 (3, 1), (3, 2), (3, 3), (3, 4), (3, 5),
 (4, 6), (4, 7), (4, 8), (4, 9), (4, 10),
 (5, 8), (5, 9), (5, 10), (5, 5), (5, 7);
+
+
+--- Test de reapprovisionnement
+-- Mettre le stock SOUS le seuil pour déclencher le réapprovisionnement
+UPDATE MEDICAMENT 
+SET UNITES_EN_STOCK = 5 
+WHERE NOM = 'Vitamine C 1000mg';

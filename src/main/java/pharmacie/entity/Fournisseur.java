@@ -1,15 +1,11 @@
 package pharmacie.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.*;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 

@@ -10,6 +10,9 @@ import com.sendgrid.SendGrid;
 import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
+
+import pharmacie.dto.EmailRequest;
+
 import org.springframework.beans.factory.annotation.Value;
 
 import org.springframework.http.ResponseEntity;
@@ -27,7 +30,7 @@ public class EmailController {
     private String fromEmail;
 
     @PostMapping("/send-email")
-    public ResponseEntity<Map<String, String>> sendEmail(@RequestBody EmailRequest emailRequest) {
+    public ResponseEntity<Map<String, String>> sendEmail(@RequestBody EmailRequest emailRequest)  {
         Map<String, String> response = new HashMap<>();
         try {
             Email from = new Email(fromEmail);
@@ -56,33 +59,4 @@ public class EmailController {
         }
     }
 
-    static class EmailRequest {
-        private String to;
-        private String subject;
-        private String body;
-
-        public String getTo() {
-            return to;
-        }
-
-        public void setTo(String to) {
-            this.to = to;
-        }
-
-        public String getSubject() {
-            return subject;
-        }
-
-        public void setSubject(String subject) {
-            this.subject = subject;
-        }
-
-        public String getBody() {
-            return body;
-        }
-
-        public void setBody(String body) {
-            this.body = body;
-        }
-    }
 }
