@@ -3,10 +3,16 @@ package pharmacie.rest;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import  com.sendgrid.Method;
+import  com.sendgrid.Request;
+import com.sendgrid.Response;
+import com.sendgrid.SendGrid;
+import com.sendgrid.helpers.mail.Mail;
+import com.sendgrid.helpers.mail.objects.Content;
+import com.sendgrid.helpers.mail.objects.Email;
+import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,24 +20,36 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class EmailController {
 
-    @Autowired
-    private JavaMailSender mailSender;
+    @Value("${sendgrid.api-key}")
+    private String sendGridApiKey;
 
-
+    @Value("${sendgrid.from-email}")
+    private String fromEmail;
 
     @PostMapping("/send-email")
     public ResponseEntity<Map<String, String>> sendEmail(@RequestBody EmailRequest emailRequest) {
         Map<String, String> response = new HashMap<>();
         try {
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setTo(emailRequest.getTo());
-            message.setSubject(emailRequest.getSubject());
-            message.setText(emailRequest.getBody());
+            Email from = new Email(fromEmail);
+            String subject = emailRequest.getSubject();
+            Email to = new Email(emailRequest.getTo());
+            Content content = new Content("text/plain", emailRequest.getBody());
+            Mail mail = new Mail(from, subject, to, content);
 
-            mailSender.send(message);
+            SendGrid sg = new SendGrid(sendGridApiKey);
+            Request request = new Request();
+            request.setMethod(Method.POST);
+            request.setEndpoint("mail/send");
+            request.setBody(mail.build());
+            Response sendGridResponse = sg.api(request);
 
-            response.put("message", "Email sent successfully to " + emailRequest.getTo());
-            return ResponseEntity.ok(response);
+            if (sendGridResponse.getStatusCode() >= 200 && sendGridResponse.getStatusCode() < 300) {
+                response.put("message", "Email sent successfully to " + emailRequest.getTo());
+                return ResponseEntity.ok(response);
+            } else {
+                response.put("error", "Failed to send email via SendGrid: " + sendGridResponse.getBody());
+                return ResponseEntity.status(sendGridResponse.getStatusCode()).body(response);
+            }
         } catch (Exception e) {
             response.put("error", "Failed to send email: " + e.getMessage());
             return ResponseEntity.internalServerError().body(response);
