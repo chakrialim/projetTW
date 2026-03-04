@@ -12,7 +12,7 @@ import pharmacie.entity.Medicament;
 
 public interface MedicamentRepository extends JpaRepository<Medicament, Integer> {
 
-    List<Commande> findByMedicamentNom(String nom);
+    List<Medicament> findByNom(String nom);
 
     /**
      * Calcule le nombre d'unités vendues pour chaque médicament d'une catégorie donnée.
