@@ -1,18 +1,24 @@
 package pharmacie.dao;
 
 import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RestResource;
 
-import pharmacie.entity.Commande;
 import pharmacie.entity.Medicament;
 
 // Cette interface sera auto-implémentée par Spring
 
 public interface MedicamentRepository extends JpaRepository<Medicament, Integer> {
 
-    List<Medicament> findByNom(String nom);
+    @RestResource(path = "findByNomStartingWith")
+    Page<Medicament> findByNom(
+        @Param("nom") String nom,
+        Pageable pageable
+    );
 
     /**
      * Calcule le nombre d'unités vendues pour chaque médicament d'une catégorie donnée.
