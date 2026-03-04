@@ -5,11 +5,15 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import pharmacie.entity.Commande;
 import pharmacie.entity.Medicament;
 
 // Cette interface sera auto-implémentée par Spring
 
 public interface MedicamentRepository extends JpaRepository<Medicament, Integer> {
+
+    List<Commande> findByMedicamentNom(String nom);
+
     /**
      * Calcule le nombre d'unités vendues pour chaque médicament d'une catégorie donnée.
      *
