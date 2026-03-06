@@ -1,22 +1,12 @@
 package pharmacie.entity;
-
 import jakarta.persistence.*;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.*;
-
 import java.util.LinkedList;
 import java.util.List;
 
-
-
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@ToString
-
+@Getter @Setter @NoArgsConstructor @ToString
 public class Fournisseur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

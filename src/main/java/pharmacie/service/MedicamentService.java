@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Slf4j
 @Service
 @Validated
-
 public class MedicamentService {
     
     @Autowired
